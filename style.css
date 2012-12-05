@@ -1,0 +1,70 @@
+body {
+    margin:0px;
+    padding:0px;
+}
+#lock {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    z-index: 2;
+    opacity: 0.5;
+    display:none;
+}
+#lockStatement {
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    z-index: 3;
+    width: 300px;
+    margin-left: -150px;
+    text-align: center;
+    background-color: white;
+    border: 2px solid red;
+    padding: 5px;
+    display:none;
+    }
+#board {
+    position:absolute;
+    top:0px;
+    bottom:0px;
+    left:0px;
+    right:250px;
+    background-color:orange;
+    overflow:hidden;
+}
+sidebar {
+    position:absolute;
+    top:0px;
+    bottom:0px;
+    right:0px;
+    width:250px;
+    background-color:pink;
+}
+
+#inBoard {
+    position:relative;
+    top:0px;
+    left:0px;
+    float:left;
+}
+#inBoard > div {
+    width:20px;
+    height:20px;
+    background-color:green;
+    float:left;
+}
+
+#inBoard > div:hover {
+    background-color:blue;
+}
+
+#inBoard > div.betaRoad {
+    background-color:greenyellow;
+}
+
+#inBoard > div.betaArea {
+    background-color:yellowgreen;
+}
