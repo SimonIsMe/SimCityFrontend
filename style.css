@@ -53,18 +53,30 @@ sidebar {
 #inBoard > div {
     width:20px;
     height:20px;
-    background-color:green;
+    background-color:#99cb7e;
     float:left;
 }
 
 #inBoard > div:hover {
-    background-color:blue;
+    background-color:blue !important;
 }
 
 #inBoard > div.betaRoad {
-    background-color:greenyellow;
+    background-color:greenyellow !important;
 }
 
 #inBoard > div.betaArea {
-    background-color:yellowgreen;
+    background-color:yellow;
+}
+
+div.residentalArea {
+    background-color:green !important;
+}
+
+div.commercialArea {
+    background-color:aquamarine !important;
+}
+
+div.industrialArea {
+    background-color:orange !important;
 }
