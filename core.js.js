@@ -22,7 +22,11 @@ Core = {
         var pusher = new Pusher('a11a902c4f5c239e34bd');
         var channel = pusher.subscribe('test_channel');
         channel.bind('buildEvent', function(data) {
+            console.log(data);
             switch (data.type) {
+                case 0:
+                    Board.remove(data.x, data.y)
+                    break;
                 case 1: 
                     Board.buildRoad(data)
                     break;
@@ -31,6 +35,9 @@ Core = {
                 case 4:
                     Board.buildArea(data, data.type)
                     break;
+                case 5:
+                    //  budynek
+                    Board.buildBuilding(data.x, data.y, data.type);
             }
             
             console.log(data);

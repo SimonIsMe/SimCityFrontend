@@ -57,8 +57,11 @@ sidebar {
     float:left;
 }
 
-#inBoard > div:hover {
+#inBoard > div.hover {
     background-color:blue !important;
+}
+#inBoard > div.hoverError {
+    background-color:red !important;
 }
 
 #inBoard > div.betaRoad {

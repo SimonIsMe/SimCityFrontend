@@ -35,6 +35,8 @@
                 <option value="area2">Strefa mieszkalna</option>
                 <option value="area3">Strefa komercyjna</option>
                 <option value="area4">Strefa przemysłowa</option>
+                <option value="remove">Buldożer</option>
+                <option value="electricity">Elektrownia</option>
             </select>
             <div id="money">
                 Obecnie: <span id="money_current">100$</span><br />

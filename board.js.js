@@ -5,6 +5,9 @@ Board = {
     drawRoad: true,
     drawArea: false,
     areaType: 2,
+    drawPlaceForBuild: false,
+    placeWidth: 2,
+    placeHeight: 3,
     init: function () {
         $("body").keypress(function(key){
             switch(key.charCode){
@@ -24,11 +27,18 @@ Board = {
             Board.cursorIsAboveTheBoard = true;
         }, function() {
             Board.cursorIsAboveTheBoard = false;
+            Board.elem.children('.hover').removeClass('hover');
+            Board.elem.children('.hoverError').removeClass('hoverError');
         });
         
         Board.generateMap();
         Board.hover();
         Board.selectFromTo();
+    },
+    remove: function(x, y) {
+        key = x + Core.mapWidth * y;
+        Core.map[key] = 0;
+        Board.generateMap();
     },
     generateMap: function() {
         i = 0;
@@ -38,15 +48,19 @@ Board = {
                     break;
                 }
                 switch(Core.map[i]) {
-                    case 1: 
+                    case 0:
+                        Board.elem.children('div#' + y + '-' + x).attr('class', '');
+                        Board.elem.children('div#' + y + '-' + x).css('backgroundImage', 'none');
+                        Board.elem.children('div#' + y + '-' + x).attr('backgroundColor', '#99CB7E');
+                        break;
+                    case 1:
                         Board.generateRoad(x, y);
-                        Board.elem.children('div#' + y + '-' + x).css('backgroundColor', 'gray');
                         break;
-                    case 2: Board.elem.children('div#' + y + '-' + x).addClass('residentalArea');
+                    case 2:Board.elem.children('div#' + y + '-' + x).addClass('residentalArea');
                         break;
-                    case 3: Board.elem.children('div#' + y + '-' + x).addClass('commercialArea');
+                    case 3:Board.elem.children('div#' + y + '-' + x).addClass('commercialArea');
                         break;
-                    case 4: Board.elem.children('div#' + y + '-' + x).addClass('industrialArea');
+                    case 4:Board.elem.children('div#' + y + '-' + x).addClass('industrialArea');
                         break;
                 }
                 i++;
@@ -124,8 +138,45 @@ Board = {
         Board.elem.children('div').bind('hover', function() {
             id = $(this).attr('id');
             params = id.split('-');
-            x = params[1];
-            y = params[0];
+            x = parseInt(params[1]);
+            y = parseInt(params[0]);
+            
+            Board.elem.children('div').removeClass('hover');
+            Board.elem.children('div').removeClass('hoverError');
+            $(this).addClass('hover');
+            
+            if (Board.drawPlaceForBuild) {
+                place = new Array(Board.placeWidth * Board.placeHeight);
+                mapIds = new Array(Board.placeWidth * Board.placeHeight);
+                i = 0;
+                
+                // obliczam współrzędne do zanzaczenia na mapie
+                for (k = x; k < x + Board.placeWidth; k++) {
+                    for (w = y; w < y + Board.placeHeight; w++) {
+                        place[i] = 'div#' + w + '-' + k;
+                        mapIds[i] = k + Core.mapWidth * w;
+                        i++;
+                    }
+                }
+                
+                canBuildHere = true;
+                //  sprawdzam, czy można postawić budynek
+                for (i = 0; i < mapIds.length; i++) {
+                    if (Core.map[mapIds[i]] != 0) {
+                        canBuildHere = false;
+                        break;
+                    }
+                }
+                
+                //  robię hover
+                for (i = 0; i < place.length; i++) {
+                    if (canBuildHere) {
+                        Board.elem.children(place[i]).addClass('hover');
+                    } else {
+                        Board.elem.children(place[i]).addClass('hoverError');
+                    }
+                }
+            }
         });
     }, 
     selectFromTo: function () {
@@ -183,6 +234,11 @@ Board = {
                 } else if (Board.drawArea) {
                     Board.elem.children('div.betaRoad').removeClass('betaArea');
                     Board.createArea(x_from, y_from, x_to, y_to);
+                } else if (Board.areaType == 0) {
+                    Core.send('remove', {
+                        'x': x_to,
+                        'y': y_to
+                    });
                 }
             }
         });
@@ -212,8 +268,6 @@ Board = {
     drawBetaRoad: function (x_from, y_from, x_to, y_to) {
         width = Math.abs(x_from - x_to);
         height = Math.abs(y_from - y_to);
-
-        console.log('Board.drawBetaRoad('+x_from+','+y_from+','+x_to+','+y_to+')');
 
         Board.elem.children('div.betaRoad').removeClass('betaRoad');
 
@@ -275,7 +329,17 @@ Board = {
         Board.generateMap();
         
     },
-    createRoad: function(x_from, y_from, x_to, y_to) {
+    buildBuilding: function (x, y, type) {
+        switch (type) {
+            case 'electricity':
+                Board.elem.children('#div' + y + '-' + x).css('backgroundColor', 'purple');
+                Board.elem.children('#div' + y + '-' + (x+1)).css('backgroundColor', 'purple');
+                Board.elem.children('#div' + (y+1) + '-' + x).css('backgroundColor', 'purple');
+                Board.elem.children('#div' + (y+1) + '-' + (x+1)).css('backgroundColor', 'purple');
+                break;
+        }
+    },
+    createRoad: function (x_from, y_from, x_to, y_to) {
         Core.send('create-road', {
             'x_from': x_from, 
             'y_from': y_from, 
