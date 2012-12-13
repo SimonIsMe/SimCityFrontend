@@ -11,6 +11,7 @@
         <script src="core.js"></script>
         <script src="board.js"></script>
         <script src="gui.js"></script>
+        <script src="money.js"></script>
         <link rel="Stylesheet" type="text/css" href="style.css" />
     </head>
     <body>

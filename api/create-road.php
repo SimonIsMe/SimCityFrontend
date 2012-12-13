@@ -77,3 +77,13 @@
                 'position_y' => $position_y
             )
          );
+    
+    $pusher->trigger(
+        'test_channel', 
+        'buildEvent', 
+            array(
+                'type' => 6,
+                'current' => 123,
+                'forecast' => 1234
+            )
+         );

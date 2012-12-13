@@ -11,12 +11,8 @@
         'test_channel', 
         'buildEvent', 
             array(
-                'type' => 'road',
-                'position_x' => array(
-                    1,2,3
-                ),
-                'position_y' => array(
-                    1,2,3
-                )
+                'type' => 6, // pieniążki
+                'current' => 99,
+                'forecast' => 123
             )
          );

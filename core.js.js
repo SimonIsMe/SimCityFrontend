@@ -1,5 +1,6 @@
 Core = {
-    apiAddress: 'http://localhost/simcity/api/',
+//    apiAddress: 'http://localhost/simcity/api/',
+    apiAddress: 'http://localhost:3000/',
     imgAddress: 'http://localhost/simcity/img/',
     map: [0, 0, 0, 0, 0, 0, 0, 0, 0],
     mapWidth: 20,
@@ -27,8 +28,8 @@ Core = {
                 case 0:
                     Board.remove(data.x, data.y)
                     break;
-                case 1: 
-                    Board.buildRoad(data)
+                case 1:
+                    Board.buildRoad(data);
                     break;
                 case 2:
                 case 3:
@@ -38,20 +39,30 @@ Core = {
                 case 5:
                     //  budynek
                     Board.buildBuilding(data.x, data.y, data.type);
+                case 6:
+                    //  pieniążki
+                    Money.current = data.current;
+                    Money.forecast = data.forecast;
+                    Money.onUpdate();
+                    break;
             }
             
-            console.log(data);
+//            console.log(data);
         });
     },
-    send: function(uri, data) {
+    send: function(uri, data, callbackSuccess) {
+        
+        if (callbackSuccess == undefined) {
+            callbackSuccess = function(data) {}
+        }
+        
         $.ajax({
             url: Core.apiAddress + uri,
             data: data,
-            success: function(data) {
-//                console.log(data);
-            },
+            dataType: 'text',
+            success: callbackSuccess,
             error: function(data) {
-                Core.onErrorConnection();
+//                Core.onErrorConnection();
             }
         });
     },
@@ -68,11 +79,8 @@ Core = {
 }
 
 
-
 $(document).ready(function(){
     Core.init();
     Board.init();
-    
-    money = new Money();
-    money.pending();
+    Money.init();
 });

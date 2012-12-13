@@ -77,8 +77,6 @@ Board = {
         neighbor[2] = position + 1;
         neighbor[3] = x + 1 + Core.mapWidth * y - 2;
         
-        console.log(Core.map[neighbor[0]]);
-        
         name = '';
         a = '';
         for (q = 0; q < 4; q++) {
@@ -95,8 +93,6 @@ Board = {
                 name += '0';
             }
         }
-        
-        console.log(x, y, name, a, position, neighbor);
         
         Board.elem.children('div#' + (y-1) + '-' + (x-1)).css('backgroundImage', "url('" + Core.imgAddress + name + ".png')");
     },
@@ -355,28 +351,5 @@ Board = {
             'y_to': y_to, 
             'type': Board.areaType
         });
-    }
-}
-
-function Money() {
-    this.current = 100;
-    this.forecast = 100;
-    this.pending = function () {
-        self = this;
-        $.ajax({
-            url: 'http://tt.local',
-            dataType: 'html',
-            success: function(data) {
-                self.current = 120;
-                self.onUpdate();
-            },
-            error: function(data) {
-//                Core.onErrorConnection();
-            }
-        })
-    };
-    this.onUpdate = function () {
-        $('#money_current').text(this.current + "$");
-        $('#forecast').text(this.forecast + "$");
     }
 }

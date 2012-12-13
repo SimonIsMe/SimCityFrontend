@@ -7,8 +7,6 @@
     $app_id = '33265';
     
     print_r($_GET);
-    
-    
         
     $pusher = new Pusher($key, $secret, $app_id);
     $pusher->trigger(
