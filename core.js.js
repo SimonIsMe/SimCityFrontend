@@ -1,7 +1,6 @@
 Core = {
-//    apiAddress: 'http://localhost/simcity/api/',
-    apiAddress: 'http://localhost:3000/',
-    imgAddress: 'http://localhost/simcity/img/',
+    apiAddress: Address.api,
+    imgAddress: Address.img,
     map: [0, 0, 0, 0, 0, 0, 0, 0, 0],
     mapWidth: 20,
     mapHeight: 20,
@@ -11,6 +10,8 @@ Core = {
         for(i = 0; i < Core.mapHeight * Core.mapWidth; i++) {
             Core.map[i] = 0;
         }
+        
+        setInterval("Core.update()", 30000);
     },
     pusher: function() {
         Pusher.log = function(message) {
@@ -26,14 +27,17 @@ Core = {
             console.log(data);
             switch (data.type) {
                 case 0:
+                    //  usuwanie
                     Board.remove(data.x, data.y)
                     break;
                 case 1:
+                    //  droga
                     Board.buildRoad(data);
                     break;
                 case 2:
                 case 3:
                 case 4:
+                    //  obszary
                     Board.buildArea(data, data.type)
                     break;
                 case 5:
@@ -46,9 +50,10 @@ Core = {
                     Money.onUpdate();
                     break;
             }
-            
-//            console.log(data);
         });
+    },
+    update: function() {
+        Core.send('update', {});
     },
     send: function(uri, data, callbackSuccess) {
         

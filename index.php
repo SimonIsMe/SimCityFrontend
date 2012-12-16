@@ -8,6 +8,7 @@
 	<script src="ui/jquery.ui.widget.js"></script>
 	<script src="ui/jquery.ui.mouse.js"></script>
 	<script src="ui/jquery.ui.draggable.js"></script>
+        <script src="api.js"></script>
         <script src="core.js"></script>
         <script src="board.js"></script>
         <script src="gui.js"></script>
