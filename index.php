@@ -19,7 +19,7 @@
         <div id="lockStatement"></div>
         <div id="lock"></div>
         <div id="board">
-            <div id="inBoard" style="width:<?php echo 20*20 ?>px">
+            <div id="inBoard" class="inBoard" style="width:<?php echo 20*20 ?>px">
                 <?php
                     for($k = 0; $k < 20; $k++) {
                         for($w=0; $w < 20; $w++){
@@ -28,11 +28,29 @@
                     }
                 ?>
             </div>
+            <div id="demand" class="inBoard" style="width:<?php echo 20*20 ?>px; margin-left:-400px;">
+                <?php
+                    for($k = 0; $k < 20; $k++) {
+                        for($w=0; $w < 20; $w++){
+                            echo '<div id="' . $k . '-' . $w . '" class="demand_0"></div>';
+                        }
+                    }
+                ?>
+            </div>
+            <div id="pollution" class="inBoard" style="width:<?php echo 20*20 ?>px; margin-left:-400px;">
+                <?php
+                    for($k = 0; $k < 20; $k++) {
+                        for($w=0; $w < 20; $w++){
+                            echo '<div id="' . $k . '-' . $w . '"  class="pollution_0"></div>';
+                        }
+                    }
+                ?>
+            </div>
         </div>
         <sidebar>
             <button id="plus">+</button>
             <button id="minus">-</button>
-            <select>
+            <select name="action">
                 <option value="road">Droga</option>
                 <option value="area2">Strefa mieszkalna</option>
                 <option value="area3">Strefa komercyjna</option>
@@ -40,10 +58,28 @@
                 <option value="remove">Buldożer</option>
                 <option value="electricity">Elektrownia</option>
             </select>
+            <select name="filtres">
+                <option value=""> - filtry - </option>
+                <option value="pollution">Zanieczyszczenie</option>
+                <option value="demand">Popyt</option>
+            </select>
             <div id="money">
                 Obecnie: <span id="money_current">100$</span><br />
                 Prognoza: <span id="forecast">100$</span>
             </div>
+            
+            <div id="demand-graph">
+                <hr />
+                <div id="industry" class="graph"></div>
+                <div id="commercial" class="graph"></div>
+                <div id="residental" class="graph"></div>
+            </div>
+            
+            <ul id="taxes">
+                <li>Str. mieszkalna <input type="number" name="taxR" min="0" step="0.1"></li>
+                <li>Str. komercjna <input type="number" name="taxC" min="0" step="0.1"></li>
+                <li>Str. przemysłowa <input type="number" name="taxI" min="0" step="0.1"></li>
+            </ul>
         </sidebar>
     </body>
 </html>

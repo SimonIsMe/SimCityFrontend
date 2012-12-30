@@ -3,9 +3,8 @@ Money = {
     forecast: 1000,
     init: function () {
         console.log('Money.init');
-        Core.send('start', {});
     },
-    onUpdate: function () {
+    update: function () {
         $('#money_current').text(this.current + "$");
         $('#forecast').text(this.forecast + "$");
     }

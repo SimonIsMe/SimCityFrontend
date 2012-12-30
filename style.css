@@ -44,17 +44,27 @@ sidebar {
     background-color:pink;
 }
 
-#inBoard {
+.inBoard {
     position:relative;
     top:0px;
     left:0px;
     float:left;
 }
-#inBoard > div {
+.inBoard > div {
     width:20px;
     height:20px;
     background-color:#99cb7e;
     float:left;
+}
+#pollution, #demand {
+    display:none;
+}
+#pollution > div {
+    background-color:red;
+}
+
+#demand > div {
+    background-color:green;
 }
 
 #inBoard > div.hover {
@@ -82,4 +92,131 @@ div.commercialArea {
 
 div.industrialArea {
     background-color:orange !important;
+}
+
+.demand_0, .pollution_0 {
+    opacity:0;
+}
+.demand_1, .pollution_1 {
+    opacity:0.1;
+}
+.demand_2, .pollution_2 {
+    opacity:0.2;
+}
+.demand_3, .pollution_3 {
+    opacity:0.3;
+}
+.demand_4, .pollution_4 {
+    opacity:0.4;
+}
+.demand_5, .pollution_5 {
+    opacity:0.5;
+}
+.demand_6, .pollution_6 {
+    opacity:0.6;
+}
+.demand_7, .pollution_7 {
+    opacity:0.7;
+}
+.demand_8, .pollution_8 {
+    opacity:0.8;
+}
+.demand_9, .pollution_9 {
+    opacity:0.9;
+}
+
+.r0 {
+    background-image:url('./img/r0.png') !important;
+}
+.r20 {
+    background-image:url('./img/r20.png') !important;
+}
+.r40 {
+    background-image:url('./img/r40.png') !important;
+}
+.r60 {
+    background-image:url('./img/r60.png') !important;
+}
+.r80 {
+    background-image:url('./img/r80.png') !important;
+}
+.r100 {
+    background-image:url('./img/r100.png') !important;
+}
+
+.c0 {
+    background-image:url('./img/c0.png') !important;
+}
+.c20 {
+    background-image:url('./img/c20.png') !important;
+}
+.c40 {
+    background-image:url('./img/c40.png') !important;
+}
+.c60 {
+    background-image:url('./img/c60.png') !important;
+}
+.c80 {
+    background-image:url('./img/c80.png') !important;
+}
+.c100 {
+    background-image:url('./img/c100.png') !important;
+}
+
+.i0 {
+    background-image:url('./img/i0.png') !important;
+}
+.i20 {
+    background-image:url('./img/i20.png') !important;
+}
+.i40 {
+    background-image:url('./img/i40.png') !important;
+}
+.i60 {
+    background-image:url('./img/i60.png') !important;
+}
+.i80 {
+    background-image:url('./img/i80.png') !important;
+}
+.i100 {
+    background-image:url('./img/i100.png') !important;
+}
+
+#demand-graph {
+    height:100px;
+    width:100px;
+    padding-top:5px;
+    padding-bottom:5px;
+    background-color:white;
+}
+#demand-graph hr {
+    border-style: solid;
+    border-width: 1px;
+    position: relative;
+    top: 40px;
+    right: 0px;
+    left: 0px;
+    margin-bottom: -10px;
+    z-index: 2;
+}
+
+.graph {
+    width:23px;
+    margin-left:5px;
+    margin-right:5px;
+    position:relative;
+    float:left;
+}
+
+#industry {
+    height:100px;
+    background-color:yellow;
+}
+#commercial {
+    height:100px;
+    background-color:aqua;
+}
+#residental {
+    height:100px;
+    background-color:green;
 }

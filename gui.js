@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $('select').click(function() {
+    $('select[name="action"]').click(function() {
         Board.drawRoad = false;
         Board.drawArea = false;
         Board.drawPlaceForBuild = false;
@@ -28,4 +28,14 @@ $(document).ready(function(){
             Board.placeHeight = 2;
         }
     });
+    
+    $('select[name="filtres"]').click(function() {
+        $('#pollution').hide();
+        $('#demand').hide();
+        $('#' + $(this).val()).show();
+    })
+    
+    $('input[type="number"]').change(function(){
+        Core.changeTax();
+    })
 });
